@@ -17,7 +17,7 @@ def dcm2png(dcm_dir, output_dir):
                 dicom_file_path = os.path.join(root, file)
                 ds = pydicom.dcmread(dicom_file_path)
                 pixel_array_numpy = ds.pixel_array  # 找到dcm文件进行保存
-                pixel_array_numpy = np.fliplr(pixel_array_numpy)
+                #pixel_array_numpy = np.fliplr(pixel_array_numpy)
 
                 output_path = os.path.join(output_dir, file.replace(".dcm", ".png"))
                 plt.imsave(output_path, pixel_array_numpy, cmap='gray')

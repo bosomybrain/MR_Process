@@ -150,6 +150,7 @@ def nii2mask2d_all_4png(root_path,masknii,picturenii,target_folder):
     print("copy finish......")
 
     for root, dir, file in os.walk(root_path):
+
         file_judge = 0 #检测文件夹是否有两个nii文件
         img_addr = ''
         label_addr = ''
@@ -163,13 +164,14 @@ def nii2mask2d_all_4png(root_path,masknii,picturenii,target_folder):
                 img_addr = root + r'\\' + r'\\' + picturenii
 
         if file_judge == 2:
-            print("nii_ready------procss"+label_addr)
+            print("nii_ready------procss:"+label_addr)
             # print(label_addr)
             # print(img_addr)
             img_addr_n = nib.load(img_addr)
             label_addr_n = nib.load(label_addr)
             # Convert them to numpy format,
             data = img_addr_n.get_fdata()
+            print('data.shape', data.shape)
             label_data = label_addr_n.get_fdata()
 
             # clip the images within [-125, 275],
@@ -182,11 +184,18 @@ def nii2mask2d_all_4png(root_path,masknii,picturenii,target_folder):
             # print(split_root)
             # extract 2D slices from 3D volume for training cases while
             # e.g. slice 000
+            print('data_clipped.shape',data_clipped.shape)
+            patient_name = root.split('\\')[-1]
             for i in range(data_clipped.shape[2]):
                 formattedi = "{:03d}".format(i)
                 slice000 = data_normalised[:, :, i] * 255
                 # np.savetxt(r"label.txt", label_data[:, :, 6], delimiter=',', fmt='%5s')
+                print('label_data.shape',label_data.shape)
+
+                assert data.shape == label_data.shape, '{} image and label shape not match!'.format(patient_name)
+
                 label_slice000 = label_data[:, :, i] * 40
+                label_slice000 = np.flipud(label_slice000)
 
                 # print(slice000.shape, type(slice000))
 
@@ -209,7 +218,7 @@ if __name__ == '__main__':
     label_addr = r"C:\Users\22495\Desktop\myomagroup3a\myomagroup3a\Chen Xiao Ya103433057\Untitled.nii.gz"
     target_folder = "./test/"
     target_folder1 = "./label_process_results/results_compare/"
-    root_path = r'.\patient_group'  # 全部患者文件夹路径
+    root_path = r'patient_group'  # 全部患者文件夹路径
     masknii = "Untitled.nii.gz"
     picturenii = "mr_data.nii.gz"
 
