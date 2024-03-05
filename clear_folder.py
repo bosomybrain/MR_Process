@@ -11,18 +11,17 @@ def del_file(path):
 
 
 def del_all():
-    del_file(r'.\unlabeled_results\png')
-    del_file(r'.\unlabeled_results\dcm')
-    del_file(r'.\labeled_results\dcm')
-    del_file(r'.\labeled_results\png')
-    del_file(r'.\dcm_select_all\png')
-    del_file(r'.\dcm_select_all\dcm')
-    del_file(r'.\label_process_results\results_compare')
-    del_file(r'.\label_process_results\Unet_data\image')
-    del_file(r'.\label_process_results\Unet_data\mask')
-    del_file(r'.\label_process_results\yolo_data\image')
-    del_file(r'.\label_process_results\yolo_data\label')
-    del_file(r'.\label_process_results\yolo_data\bounding_image')
+    del_file('./unlabeled_results/png')
+    del_file('./unlabeled_results/dcm')
+    del_file('./labeled_results/dcm')
+    del_file('./labeled_results/png')
+    del_file('./dcm_select_all/png')
+    del_file('./dcm_select_all/dcm')
+    del_file('./label_process_results/results_compare')
+    del_file('./label_process_results/Unet_data/image')
+    del_file('./label_process_results/Unet_data/mask')
+    del_file('./label_process_results/yolo_data')
+
     print('文件已经清空完成')
 
 def del_patient():

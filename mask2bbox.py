@@ -99,13 +99,13 @@ def process_yolov5_and_Unet_data_together(address):
             split_file = f.split('_')  # 通过\\来进行截断
             if split_file[-1] == "label.png":
                 #mask_ori是mask照片，rgb_name是mask对应的rgb照片
-                mask_ori = cv2.imread(r'.\\label_process_results\\results_compare\\' + f, cv2.COLOR_BGR2GRAY)
-                rgb_name = r'.\\label_process_results\\results_compare\\' + split_file[0] + r'_' + split_file[1] + r'_'+ split_file[2]+ r'_'+ split_file[3] + r'.png'
-                Unet_pic_ori = cv2.imread(r'.\\label_process_results\\results_compare\\' + split_file[0] + r'_' + split_file[1] + r'_'+ split_file[2]+ r'_'+ split_file[3] + r'.png')
-                yolo_name = r'.\\label_process_results\\yolo_data\\label\\' + split_file[0] + r'_' + split_file[1] + r'_'+ split_file[2] + r'_'+ split_file[3] + r'.txt'
-                target_bbox_name = r'.\\label_process_results\\yolo_data\\bounding_image\\' + split_file[0] + r'_' + split_file[1] + r'_'+ split_file[2] + r'_'+ split_file[3] + r'.jpg'
+                mask_ori = cv2.imread('./label_process_results/results_compare/' + f, cv2.COLOR_BGR2GRAY)
+                rgb_name = './label_process_results/results_compare/' + split_file[0] + r'_' + split_file[1] + r'_'+ split_file[2]+ r'_'+ split_file[3] + r'.png'
+                Unet_pic_ori = cv2.imread('./label_process_results/results_compare/' + split_file[0] + r'_' + split_file[1] + r'_'+ split_file[2]+ r'_'+ split_file[3] + r'.png')
+                yolo_name = './label_process_results/yolo_data/label/' + split_file[0] + r'_' + split_file[1] + r'_'+ split_file[2] + r'_'+ split_file[3] + r'.txt'
+                target_bbox_name = './label_process_results/yolo_data/bounding_image/' + split_file[0] + r'_' + split_file[1] + r'_'+ split_file[2] + r'_'+ split_file[3] + r'.jpg'
 
-                f_new_path_yolo = r'.\\label_process_results\\yolo_data\\image\\' + split_file[0] + r'_' + split_file[1] + r'_'+ split_file[2]+ r'_'+ split_file[3] + r'.png'
+                f_new_path_yolo = './label_process_results/yolo_data/image/' + split_file[0] + r'_' + split_file[1] + r'_'+ split_file[2]+ r'_'+ split_file[3] + r'.png'
                 # f_new_path_Unet = r'.\\label_process_results\\Unet_data\\image\\' + split_file[0] + r'_' + split_file[
                 #     1] + r'_' + split_file[2] + r'_' + split_file[3] + r'.png'
                 shutil.copy(rgb_name, f_new_path_yolo)
@@ -153,11 +153,11 @@ def process_yolov5_and_Unet_data_together(address):
                         cv2.rectangle(mask_rgb, (b[0], b[1]), (b[0] + b[2], b[1] + b[3]), (255, 255, 0), 2)
                         classification = 0
                         num_classification0 = num_classification0 + 1
-                        Unet_pic_name = r'.\\label_process_results\\Unet_data\\image\\' + str(classification) + r'\\' + \
+                        Unet_pic_name = './label_process_results/Unet_data/image/' + str(classification) + r'/' + \
                                         split_file[0] + r'_' + split_file[
                                             1] + r'_' + split_file[2] + r'_' + split_file[3] + r'_num' + str(
                             num_classification2) + r'.png'
-                        Unet_mask_name = r'.\\label_process_results\\Unet_data\\mask\\' + str(classification) + r'\\' + \
+                        Unet_mask_name = './label_process_results/Unet_data/mask/' + str(classification) + r'/' + \
                                          split_file[0] + r'_' + split_file[
                                              1] + r'_' + split_file[2] + r'_' + split_file[3] + r'_num' + str(
                             num_classification2) + r'.png'
@@ -165,11 +165,11 @@ def process_yolov5_and_Unet_data_together(address):
                         cv2.rectangle(mask_rgb, (b[0], b[1]), (b[0] + b[2], b[1] + b[3]), (255, 255, 0), 2)
                         classification = 0
                         num_classification0 = num_classification0 + 1
-                        Unet_pic_name = r'.\\label_process_results\\Unet_data\\image\\' + str(classification) + r'\\' + \
+                        Unet_pic_name = './label_process_results/Unet_data/image/' + str(classification) + r'/' + \
                                         split_file[0] + r'_' + split_file[
                                             1] + r'_' + split_file[2] + r'_' + split_file[3] + r'_num' + str(
                             num_classification3) + r'.png'
-                        Unet_mask_name = r'.\\label_process_results\\Unet_data\\mask\\' + str(classification) + r'\\' + \
+                        Unet_mask_name = './label_process_results/Unet_data/mask/' + str(classification) + r'/' + \
                                          split_file[0] + r'_' + split_file[
                                              1] + r'_' + split_file[2] + r'_' + split_file[3] + r'_num' + str(
                             num_classification3) + r'.png'
@@ -177,11 +177,11 @@ def process_yolov5_and_Unet_data_together(address):
                         cv2.rectangle(mask_rgb, (b[0], b[1]), (b[0] + b[2], b[1] + b[3]), (0, 0, 255), 2)
                         classification = 0
                         num_classification0 = num_classification0 + 1
-                        Unet_pic_name = r'.\\label_process_results\\Unet_data\\image\\' + str(classification) + r'\\' + \
+                        Unet_pic_name = './label_process_results/Unet_data/image/' + str(classification) + r'/' + \
                                         split_file[0] + r'_' + split_file[
                                             1] + r'_' + split_file[2] + r'_' + split_file[3] + r'_num' + str(
                             num_classification0) + r'.png'
-                        Unet_mask_name = r'.\\label_process_results\\Unet_data\\mask\\' + str(classification) + r'\\' + \
+                        Unet_mask_name = './label_process_results/Unet_data/mask/' + str(classification) + r'/' + \
                                          split_file[0] + r'_' + split_file[
                                              1] + r'_' + split_file[2] + r'_' + split_file[3] + r'_num' + str(
                             num_classification0) + r'.png'
@@ -189,11 +189,11 @@ def process_yolov5_and_Unet_data_together(address):
                         cv2.rectangle(mask_rgb, (b[0], b[1]), (b[0] + b[2], b[1] + b[3]), (255, 255, 0), 2)
                         classification = 0
                         num_classification0 = num_classification0 + 1
-                        Unet_pic_name = r'.\\label_process_results\\Unet_data\\image\\' + str(classification) + r'\\' + \
+                        Unet_pic_name = './label_process_results/Unet_data/image/' + str(classification) + r'/' + \
                                         split_file[0] + r'_' + split_file[
                                             1] + r'_' + split_file[2] + r'_' + split_file[3] + r'_num' + str(
                             num_classification1) + r'.png'
-                        Unet_mask_name = r'.\\label_process_results\\Unet_data\\mask\\' + str(classification) + r'\\' + \
+                        Unet_mask_name = './label_process_results/Unet_data/mask/' + str(classification) + r'/' + \
                                          split_file[0] + r'_' + split_file[
                                              1] + r'_' + split_file[2] + r'_' + split_file[3] + r'_num' + str(
                             num_classification1) + r'.png'
@@ -201,11 +201,11 @@ def process_yolov5_and_Unet_data_together(address):
                         cv2.rectangle(mask_rgb, (b[0], b[1]), (b[0] + b[2], b[1] + b[3]), (255, 255, 0), 2)
                         classification = 0
                         num_classification0 = num_classification0 + 1
-                        Unet_pic_name = r'.\\label_process_results\\Unet_data\\image\\' + str(classification) + r'\\' + \
+                        Unet_pic_name = './label_process_results/Unet_data/image/' + str(classification) + r'/' + \
                                         split_file[0] + r'_' + split_file[
                                             1] + r'_' + split_file[2] + r'_' + split_file[3] + r'_num' + str(
                             num_classification4) + r'.png'
-                        Unet_mask_name = r'.\\label_process_results\\Unet_data\\mask\\' + str(classification) + r'\\' + \
+                        Unet_mask_name = './label_process_results/Unet_data/mask/' + str(classification) + r'/' + \
                                          split_file[0] + r'_' + split_file[
                                              1] + r'_' + split_file[2] + r'_' + split_file[3] + r'_num' + str(
                             num_classification4) + r'.png'
@@ -213,11 +213,11 @@ def process_yolov5_and_Unet_data_together(address):
                         cv2.rectangle(mask_rgb, (b[0], b[1]), (b[0] + b[2], b[1] + b[3]), (255, 255, 0), 2)
                         classification = 0
                         num_classification0 = num_classification0 + 1
-                        Unet_pic_name = r'.\\label_process_results\\Unet_data\\image\\' + str(classification) + r'\\' + \
+                        Unet_pic_name = './label_process_results/Unet_data/image/' + str(classification) + r'/' + \
                                         split_file[0] + r'_' + split_file[
                                             1] + r'_' + split_file[2] + r'_' + split_file[3] + r'_num' + str(
                             num_classification5) + r'.png'
-                        Unet_mask_name = r'.\\label_process_results\\Unet_data\\mask\\' + str(classification) + r'\\' + \
+                        Unet_mask_name = './label_process_results/Unet_data/mask/' + str(classification) + r'/' + \
                                          split_file[0] + r'_' + split_file[
                                              1] + r'_' + split_file[2] + r'_' + split_file[3] + r'_num' + str(
                             num_classification5) + r'.png'

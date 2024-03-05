@@ -25,7 +25,7 @@ def nii2mask2d(img_addr,label_addr,target_folder):
     # normalize each 3D image to [0, 1], and
     data_normalised = (data_clipped - (-125)) / (275 - (-125))
 
-    split_root = img_addr.split('\\')  # 通过\\来进行截断
+    split_root = img_addr.split('/')  # 通过\\来进行截断
     print(split_root)
     # extract 2D slices from 3D volume for training cases while
     # e.g. slice 000
@@ -46,11 +46,11 @@ def nii2mask2d(img_addr,label_addr,target_folder):
         label = Image.fromarray(label_slice000)
         # print(type(label))
         # label = cv2.normalize(label, dst=None, alpha=0, beta=255, norm_type=cv2.NORM_MINMAX, dtype=cv2.CV_8U)
-        np.savetxt(r".\test\masknoL" + str(i + 1) + ".txt", label)
+        np.savetxt("./test/masknoL" + str(i + 1) + ".txt", label)
         # imageio.imsave(r".\test\mask_new" + str(i + 1) + ".png", label)
         label = label.convert("L")
         label = label.rotate(270)
-        np.savetxt(r".\test\mask" + str(i + 1) + ".txt", label)
+        np.savetxt("./test/mask" + str(i + 1) + ".txt", label)
         #已验证分类结果没消失
 
         image.save(target_folder + split_root[-2]+"T2W_TSE_" + str(i+1) + ".png")
@@ -70,11 +70,11 @@ def nii2mask2d_all(root_path,masknii,picturenii,target_folder):
         for f in file :
             if f == masknii:
                 file_judge = file_judge +1
-                label_addr = root + r"\\" + r'\\' + masknii
+                label_addr = root + r"/" + r'/' + masknii
 
             if f == picturenii:
                 file_judge = file_judge + 1
-                img_addr = root + r'\\' + r'\\' + picturenii
+                img_addr = root + r'/' + r'/' + picturenii
 
         if file_judge == 2:
             print("nii_ready------procss"+label_addr)
@@ -124,30 +124,33 @@ output:none
 '''
 def nii2mask2d_all_4png(root_path,masknii,picturenii,target_folder):
     print("copy data from \labeled_results\png......")
-    for root, dir, file in os.walk(r'.\labeled_results\png'):
-        # print(file)
-        pic_num = 1
-        patient_name = ''
-        for f in file:
-            split_file = f.split('.')
-            f_old_path = os.path.join(root, f)
-            # print(f_old_path)
-            split_file = split_file[0].split('_')
-            # print(split_file)
-            # 找到放了T2W_TSE的文件夹，复制里面的所有文件，并修改名称
-            if split_file[0] == patient_name: #患者没改变则该序号保存
-                pic_num = pic_num + 1
-                f_new_name = patient_name + '_T2W_TSE_' + str(pic_num) + ".png"
-            else:
-                pic_num = 1
-                patient_name = split_file[0]
-                f_new_name = patient_name + '_T2W_TSE_' + str(pic_num) + ".png"
-            # print(f_new_name)
-            # 保存图片到新路径
-            f_new_path = os.path.join(target_folder, f_new_name)
-            # print(f_new_path)
-            shutil.copy(f_old_path, f_new_path)
+    files = os.listdir('./labeled_results/png')
+    root = './labeled_results/png'
+    files.sort()
+    pic_num = 1
+    patient_name = ''
+    for f in files:
+        split_file = f.split('.')
+        f_old_path = os.path.join(root, f)
+        # print(f_old_path)
+        split_file = split_file[0].split('_')
+        # print(split_file)
+        # 找到放了T2W_TSE的文件夹，复制里面的所有文件，并修改名称
+        if split_file[0] == patient_name: #患者没改变则该序号保存
+            pic_num = pic_num + 1
+            f_new_name = patient_name + '_T2W_TSE_' + str(pic_num) + ".png"
+        else:
+            pic_num = 1
+            patient_name = split_file[0]
+            f_new_name = patient_name + '_T2W_TSE_' + str(pic_num) + ".png"
+        # print(f_new_name)
+        # 保存图片到新路径
+        f_new_path = os.path.join(target_folder, f_new_name)
+        # print(f_new_path)
+        shutil.copy(f_old_path, f_new_path)
     print("copy finish......")
+
+
 
     for root, dir, file in os.walk(root_path):
 
@@ -157,11 +160,11 @@ def nii2mask2d_all_4png(root_path,masknii,picturenii,target_folder):
         for f in file :
             if f == masknii:
                 file_judge = file_judge +1
-                label_addr = root + r"\\" + r'\\' + masknii
+                label_addr = root + r"/" + r'/' + masknii
 
             if f == picturenii:
                 file_judge = file_judge + 1
-                img_addr = root + r'\\' + r'\\' + picturenii
+                img_addr = root + r'/' + r'/' + picturenii
 
         if file_judge == 2:
             print("nii_ready------procss:"+label_addr)
@@ -180,12 +183,12 @@ def nii2mask2d_all_4png(root_path,masknii,picturenii,target_folder):
             # normalize each 3D image to [0, 1], and
             data_normalised = (data_clipped - (-125)) / (275 - (-125))
 
-            split_root = img_addr.split('\\')  # 通过\\来进行截断
+            split_root = img_addr.split('/')  # 通过\\来进行截断
             # print(split_root)
             # extract 2D slices from 3D volume for training cases while
             # e.g. slice 000
-            print('data_clipped.shape',data_clipped.shape)
-            patient_name = root.split('\\')[-1]
+            print('data_clipped.shape', data_clipped.shape)
+            patient_name = root.split('/')[-1]
             for i in range(data_clipped.shape[2]):
                 formattedi = "{:03d}".format(i)
                 slice000 = data_normalised[:, :, i] * 255

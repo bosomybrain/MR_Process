@@ -1,10 +1,10 @@
 import os
 import shutil
 
-target_path_label = '.\label_process_results\yolo_data\label'
-target_path_image = '.\label_process_results\yolo_data\image'
-none_empty_label = r'.\label_process_results\yolo_data\none_empty_label'
-none_empty_image = r'.\label_process_results\yolo_data\none_empty_image'
+target_path_label = './label_process_results/yolo_data/label'
+target_path_image = './label_process_results/yolo_data/image'
+none_empty_label = './label_process_results/yolo_data/none_empty_label'
+none_empty_image = './label_process_results/yolo_data/none_empty_image'
 
 file_list = os.listdir(target_path_label)
 

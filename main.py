@@ -15,16 +15,16 @@ if __name__ == '__main__':
     # clear_folder.del_file(r'.\label_process_results\Unet_data')
 
     target_name = "Untitled.nii.gz"  # nii文件的名称
-    root_path = r'.\patient_group'  # 全部患者文件夹路径
-    output_path_all = r'.\dcm_select_all\dcm'
-    output_path_all_png = r'.\dcm_select_all\png'
-    output_path_unlabeled = r'.\unlabeled_results\dcm' # 最后输出的dcm文件夹路径
-    output_path_unlabeled_png = r'.\unlabeled_results\png'
-    output_path_labeled = r'.\labeled_results\dcm'
-    output_path_labeled_png = r'.\labeled_results\png'
+    root_path = './patient_group'  # 全部患者文件夹路径
+    output_path_all = './dcm_select_all/dcm'
+    output_path_all_png = './dcm_select_all/png'
+    output_path_unlabeled = './unlabeled_results/dcm' # 最后输出的dcm文件夹路径
+    output_path_unlabeled_png = './unlabeled_results/png'
+    output_path_labeled = './labeled_results/dcm'
+    output_path_labeled_png = './labeled_results/png'
     #nii生成参数
-    label_path = r'.\labeled_results\png'
-    output_path = r'.\patient_group'
+    label_path = './labeled_results/png'
+    output_path = './patient_group'
     # output_path_unlabeled = r'.\test'
     # nii比较结果
     masknii = "Untitled.nii.gz"
